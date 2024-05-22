@@ -13,6 +13,16 @@ class SearchTools:
 
     @tool("Always use first for search")
     def full_search(self, initial_question, website_url):
+        """
+            Perform a full search using OpenAI API and Serper API.
+
+            Args:
+                initial_question (str): The initial question to generate search queries from.
+                website_url (str): The website URL to constrain the search within.
+
+            Returns:
+                list: A list of scraped results from the top search results.
+        """
 
         OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
         SERPER_API_KEY = os.getenv('SERPER_API_KEY')
