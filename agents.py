@@ -1,8 +1,10 @@
 from crewai import Agent
-from crewai_tools import SerperDevTool, ScrapeWebsiteTool
+from crewai_tools import ScrapeWebsiteTool
+from searchTool import SearchTools
 
-search_tool = SerperDevTool()
+search_tool = SearchTools()
 scrape_tool = ScrapeWebsiteTool()
+
 
 class QuestionAnswerAgents:
 
@@ -11,8 +13,8 @@ class QuestionAnswerAgents:
             role='Novice researcher',
             backstory=f"""You are a junior intern at the company, who is keen on doing research.""",
             goal=f"Try different search queries regarding {question}, and obtain results ONLY from {url} and its"
-                  "subdirectories",
-            tools = [search_tool, scrape_tool],
+                 "subdirectories. Use the search tool!",
+            tools=[search_tool, scrape_tool],
             allow_delegation=False,
             memory=True,
             verbose=True

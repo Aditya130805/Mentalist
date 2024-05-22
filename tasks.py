@@ -1,5 +1,6 @@
 from crewai import Task
 
+
 class QuestionAnswerTasks:
 
     def research_task(self, agent, question, url):
