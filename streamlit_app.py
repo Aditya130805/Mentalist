@@ -6,6 +6,11 @@ from crewai import Crew
 from tasks import QuestionAnswerTasks
 from agents import QuestionAnswerAgents
 
+__import__('pysqlite3')
+import sys
+
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
 load_dotenv()
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 SERPER_API_KEY = os.getenv('SERPER_API_KEY')
