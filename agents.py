@@ -1,8 +1,7 @@
 from crewai import Agent
-from crewai_tools import ScrapeWebsiteTool
-from searchTool import SearchTools
+from crewai_tools import SerperDevTool, ScrapeWebsiteTool
 
-search_tool = SearchTools()
+search_tool = SerperDevTool()
 scrape_tool = ScrapeWebsiteTool()
 
 
