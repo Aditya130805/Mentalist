@@ -9,6 +9,7 @@ class QuestionAnswerTasks:
                             Search and scrape a lot.""",
             expected_output="An organized and detailed collection of pertinent information scraped from "
                             "relevant websites.",
+            async_execution=True,
             agent=agent
         )
 
@@ -18,6 +19,7 @@ class QuestionAnswerTasks:
                            formulate a factually correct answer to {question} with no assumptions or 
                            guesses involved at all.""",
             expected_output=f"A concise response to the question: {question}.",
+            async_execution=False,
             agent=agent
         )
 
@@ -27,5 +29,6 @@ class QuestionAnswerTasks:
                             Make the sentences flow. Immerse the readers in your writing. Proofread, check facts, 
                             have a polite tone, and address the issue directly.""",
             expected_output="The final edited and proofread response to be shown to the user.",
+            async_execution=False,
             agent=agent
         )
