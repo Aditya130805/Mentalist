@@ -6,6 +6,7 @@ search_tool = SerperDevTool()
 custom_search_tool = SearchTools()
 scrape_tool = ScrapeWebsiteTool()
 
+
 class QuestionAnswerAgents:
 
     def senior_research_agent(self, question, url):
@@ -18,7 +19,7 @@ class QuestionAnswerAgents:
                          or information could not be obtained. Your insights will lay the groundwork for aptly 
                          addressing any questions our respected customers have.""",
             goal=f"Conduct thorough research on {question}, primarily from {url} and its subdirectories.",
-            tools = [search_tool, scrape_tool],
+            tools=[search_tool, scrape_tool],
             allow_delegation=False,
             verbose=True
         )
@@ -28,8 +29,8 @@ class QuestionAnswerAgents:
             role='Novice researcher',
             backstory=f"""You are a junior intern at the company, who is keen on doing research.""",
             goal=f"Try different search queries regarding {question}, and obtain results ONLY from {url} and its"
-                  "subdirectories",
-            tools = [custom_search_tool.full_search, scrape_tool],
+                 "subdirectories",
+            tools=[custom_search_tool.full_search, scrape_tool],
             allow_delegation=False,
             memory=True,
             verbose=True
