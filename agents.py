@@ -55,7 +55,8 @@ class QuestionAnswerAgents:
                          crucial bits of information, you can edit it in such a way as to convey that information
                          masterfully to answer whatever question it is that was posed. You remain to the point, and
                          use facts as your superpower.""",
-            goal=f"Masterfully craft a perfect response to {question} given its answer in a crude form. Be sure to format it nicely!",
+            goal=f"Masterfully craft a perfect response to {question} given its answer in a crude form. "
+                 "Be sure to format it nicely!",
             allow_delegation=False,
             verbose=True
         )
