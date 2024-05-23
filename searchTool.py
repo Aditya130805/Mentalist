@@ -7,6 +7,7 @@ import os
 import http.client
 import json
 from crewai_tools import ScrapeWebsiteTool
+from dataExtractor import get_links
 
 
 class SearchTools:
@@ -95,4 +96,8 @@ class SearchTools:
         print(search_queries)
         cumulative_results = search_with_serper(search_queries, website_url)
         print(cumulative_results)
+
+        if not cumulative_results:
+            cumulative_results = get_links(website_url, initial_question)
+
         return cumulative_results
