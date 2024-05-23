@@ -18,8 +18,8 @@ class QuestionAnswerTasks:
             description=f"""Given a lot of organized and detailed collection of pertinent information, 
                            formulate a factually correct answer to {question} with no assumptions or 
                            guesses involved at all.""",
-            expected_output=f"A concise response to the question: {question} with information only from "
-                            "{url} and its subdirectories.",
+            expected_output=f"""A concise response to the question: {question} with information only from 
+                              {url} and its subdirectories.""",
             async_execution=False,
             agent=agent
         )
