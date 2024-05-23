@@ -9,7 +9,7 @@ class QuestionAnswerTasks:
                             Search and scrape a lot.""",
             expected_output="An organized and detailed collection of pertinent information scraped from "
                             "relevant websites.",
-            async_execution=True,
+            async_execution=False,
             agent=agent
         )
 
