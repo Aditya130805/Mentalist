@@ -38,21 +38,23 @@ if st.sidebar.button("Submit"):
         start_time = t.time()
 
         # Create Agents
-        researcher_agent = agents.research_agent(question, url)
+        senior_researcher_agent = agents.senior_research_agent(question, url)
+        junior_researcher_agent = agents.junior_research_agent(question, url)
         information_extracting_agent = agents.information_extracting_agent(question, url)
         response_agent = agents.response_agent(question, url)
 
         # Create Tasks
-        research = tasks.research_task(researcher_agent, question, url)
+        junior_research = tasks.research_task(junior_researcher_agent, question, url)
+        senior_research = tasks.research_task(senior_researcher_agent, question, url)
         rough_answer = tasks.information_extracting_task(information_extracting_agent, question, url)
         response = tasks.response_task(response_agent, question, url)
 
-        rough_answer.context = [research]
+        rough_answer.context = [junior_research, senior_research]
         response.context = [rough_answer]
 
         crew = Crew(
-            agents=[researcher_agent, information_extracting_agent, response_agent],
-            tasks=[research, rough_answer, response]
+            agents=[junior_researcher_agent, senior_researcher_agent, information_extracting_agent, response_agent],
+            tasks=[junior_research, senior_research, rough_answer, response]
         )
 
         # Execute tasks
