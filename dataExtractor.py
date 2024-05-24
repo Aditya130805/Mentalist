@@ -81,28 +81,30 @@ def get_links(base_url, initial_question):
     gptResponse = client.chat.completions.create(
         messages=[
             {"role": "user",
-             "content": f"""{visited_urls}\n\nWhich link do you think is the most relevant from the given list 
+             "content": f"""{visited_urls}\n\nWhich two links do you think are the most relevant from the given list 
                                       for the question: {initial_question}\n\nDo not say anything else. 
-                                      JUST THE LINK. NOTHING ELSE"""}
+                                      JUST THE LINKS. NOTHING ELSE"""}
         ],
         model="gpt-3.5-turbo",
         max_tokens=50,
         temperature=0.0
     )
     print(gptResponse)
-    best_url = gptResponse.choices[0].message.content
-    print(best_url)
+    best_urls = gptResponse.choices[0].message.content.split('\n')
+    print(best_urls)
 
     # Scraping the best url
-    raw_content = requests.get(best_url)
-    soup = BeautifulSoup(raw_content.content, 'html.parser')
-    text_elements = soup.find_all(string=True)  # Gets all the text inside <p>, <div>, <span>, <h1>, <h2>, etc.
-    visible_texts = filter(is_visible, text_elements)
-    processed_content = ' '.join(t.strip() for t in visible_texts)
-    processed_content = re.sub(r'\s+', ' ', processed_content)
+    final_content = ''
+    for best_url in best_urls:
+        raw_content = requests.get(best_url)
+        soup = BeautifulSoup(raw_content.content, 'html.parser')
+        text_elements = soup.find_all(string=True)  # Gets all the text inside <p>, <div>, <span>, <h1>, <h2>, etc.
+        visible_texts = filter(is_visible, text_elements)
+        processed_content = ' '.join(t.strip() for t in visible_texts)
+        final_content += re.sub(r'\s+', ' ', processed_content)
 
-    print(processed_content)
-    return processed_content
+    print(final_content)
+    return final_content
 
 
 if __name__ == '__main__':

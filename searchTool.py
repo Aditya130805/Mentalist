@@ -32,13 +32,17 @@ class SearchTools:
 
         def generate_queries(question):
             # Use OpenAI API to generate three different search queries based on the initial question
+            # QUERY_GEN_MSG = f"Generate three related search queries based on the initial question without changing the inherent question, you can make them just a bit more generalized each time: {question}"
+            QUERY_GEN_MSG = (f"Extract key details and ask the same question given in three ways: "
+                             f"\nQuestion: {question}\nGive me ONLY the three questions! Generate results such that "
+                             f"every time I ask you, you will give me exactly these.")
             response = client.chat.completions.create(
                 messages=[
                     {"role": "user",
-                     "content": f"Generate three related search queries based on the initial question without changing the inherent question, you can make them just a bit more generalized each time: {question}"}
+                     "content": QUERY_GEN_MSG}
                 ],
                 model="gpt-3.5-turbo",
-                max_tokens=50,
+                max_tokens=200,
                 temperature=0.0
             )
             response = response.choices[0].message.content.split('\n')
